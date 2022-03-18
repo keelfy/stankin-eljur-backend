@@ -1,0 +1,25 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/eljur}
+    username: ${DATABASE_USER:eljur_admin}
+    password: ${DATABASE_PASSWORD:1q2w3e4r5t6y}
+    driver-class-name: org.postgresql.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  liquibase:
+    enabled: false
+    change-log: ${CHANGE_LOG_URL:classpath:/db/changelog-rshb/db.changelog-master.xml}
+  jpa:
+    hibernate:
+      transaction.coordinator_class: jta
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        auto_quote_keyword: true
+        format_sql: true
+    show-sql: ${DATABASE_SHOWSQL:false}
