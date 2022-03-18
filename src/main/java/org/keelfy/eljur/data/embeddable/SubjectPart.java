@@ -5,6 +5,8 @@ import org.keelfy.eljur.model.FinalExaminationType;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * @author Egor Kuzmin
@@ -13,6 +15,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class SubjectPart {
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "final_examination_type")
     private FinalExaminationType finalExaminationType = FinalExaminationType.NONE;
 

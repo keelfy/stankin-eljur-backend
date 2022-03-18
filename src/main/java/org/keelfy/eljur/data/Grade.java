@@ -1,27 +1,31 @@
 package org.keelfy.eljur.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
-import org.keelfy.eljur.data.embeddable.ModificationInfo;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.keelfy.eljur.model.GradeType;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.math.BigInteger;
+import java.time.ZonedDateTime;
 
 /**
  * @author Egor Kuzmin
@@ -42,7 +46,8 @@ public class Grade {
     private Integer value;
 
     @ManyToOne
-    @JoinColumn(name = "rated_by_id", referencedColumnName = "id")
+    @JoinColumn(name = "rated_by_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_grade_rated_by_id"))
     @NotFound(action = NotFoundAction.IGNORE)
     private Credentials ratedBy;
 
@@ -54,10 +59,31 @@ public class Grade {
     private Boolean onTime = true;
 
     @ManyToOne
-    @JoinColumn(name = "student_semester_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "student_semester_id", referencedColumnName = "id", nullable = false,
+            foreignKey = @ForeignKey(name = "fk_grade_student_semester_id"))
     private StudentSemester studentSemester;
 
-    @Embedded
-    private ModificationInfo modificationInfo;
+    @CreatedBy
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "created_by_id", referencedColumnName = "id", updatable = false,
+            foreignKey = @ForeignKey(name = "fk_grade_created_by_id"))
+    private Credentials createdBy;
 
+    @LastModifiedBy
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "last_modified_by_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_grade_last_modified_by_id"))
+    private Credentials lastModifiedBy;
+
+    @CreationTimestamp
+    @JsonIgnore
+    @Column(name = "created_at", updatable = false)
+    private ZonedDateTime createdAt;
+
+    @UpdateTimestamp
+    @JsonIgnore
+    @Column(name = "updated_at")
+    private ZonedDateTime updatedAt;
 }
