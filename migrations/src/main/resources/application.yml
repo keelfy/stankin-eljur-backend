@@ -1,0 +1,14 @@
+spring:
+  main:
+    banner-mode: off
+    web-application-type: SERVLET
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/eljur}
+    username: ${DATABASE_USER:eljur_admin}
+    password: ${DATABASE_PASSWORD:1q2w3e4r5t6y}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: ${CHANGE_LOG_URL:classpath:/db/changelog/db.changelog-master.xml}
+
+server:
+  port: ${SERVER_PORT:8111}

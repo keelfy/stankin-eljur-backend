@@ -1,7 +1,7 @@
 package org.keelfy.eljur.data.model;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 public enum GradeType {
 

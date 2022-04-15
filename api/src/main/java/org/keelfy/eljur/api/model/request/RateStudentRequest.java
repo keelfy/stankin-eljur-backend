@@ -5,22 +5,20 @@ import org.keelfy.eljur.data.model.GradeType;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-import java.math.BigInteger;
-
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @Data
 public class RateStudentRequest {
 
     @NonNull
-    private BigInteger studentSemesterId;
+    private Long studentSemesterId;
 
     @NonNull
     private Integer value;
 
-    @Nullable
-    private BigInteger ratedBy;
+    @NonNull
+    private Long ratedBy;
 
     @NonNull
     private GradeType gradeType;

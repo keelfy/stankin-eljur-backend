@@ -4,7 +4,7 @@ import org.keelfy.eljur.data.entity.Grade;
 import org.keelfy.eljur.api.model.request.RateStudentRequest;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 public interface GradeService {
 

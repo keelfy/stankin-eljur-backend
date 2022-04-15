@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @UtilityClass
 public class SecurityUtil {

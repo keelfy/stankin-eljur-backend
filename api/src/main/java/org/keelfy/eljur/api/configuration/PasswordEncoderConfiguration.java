@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @Configuration
 public class PasswordEncoderConfiguration {

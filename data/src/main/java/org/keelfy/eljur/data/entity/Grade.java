@@ -24,11 +24,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.math.BigInteger;
 import java.time.ZonedDateTime;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @Data
 @Entity
@@ -40,14 +39,13 @@ public class Grade {
     @Id
     @SequenceGenerator(name = "gradeIdSeq", sequenceName = "grade_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "gradeIdSeq", strategy = GenerationType.SEQUENCE)
-    private BigInteger id;
+    private Long id;
 
     @Column(name = "value")
     private Integer value;
 
     @ManyToOne
-    @JoinColumn(name = "rated_by_id", referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_grade_rated_by_id"))
+    @JoinColumn(name = "rated_by_id", referencedColumnName = "id")
     @NotFound(action = NotFoundAction.IGNORE)
     private Credentials ratedBy;
 
@@ -59,22 +57,24 @@ public class Grade {
     private Boolean onTime = true;
 
     @ManyToOne
-    @JoinColumn(name = "student_semester_id", referencedColumnName = "id", nullable = false,
-            foreignKey = @ForeignKey(name = "fk_grade_student_semester_id"))
+    @JoinColumn(name = "student_semester_id", referencedColumnName = "id", nullable = false)
     private StudentSemester studentSemester;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Subject subject;
 
     @CreatedBy
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "created_by_id", referencedColumnName = "id", updatable = false,
-            foreignKey = @ForeignKey(name = "fk_grade_created_by_id"))
+    @JoinColumn(name = "created_by_id", referencedColumnName = "id", updatable = false)
     private Credentials createdBy;
 
     @LastModifiedBy
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "last_modified_by_id", referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_grade_last_modified_by_id"))
+    @JoinColumn(name = "last_modified_by_id", referencedColumnName = "id")
     private Credentials lastModifiedBy;
 
     @CreationTimestamp

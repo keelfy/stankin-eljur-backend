@@ -28,7 +28,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @Data
 @Entity
@@ -42,7 +42,7 @@ public class StudentSemester {
     @Id
     @SequenceGenerator(name = "studentSemesterIdSeq", sequenceName = "student_semester_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "studentSemesterIdSeq", strategy = GenerationType.SEQUENCE)
-    private BigInteger id;
+    private Long id;
 
     @ManyToOne
     @JsonIgnore

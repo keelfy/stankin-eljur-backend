@@ -23,12 +23,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.math.BigInteger;
 import java.time.ZonedDateTime;
 import java.util.Map;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @Data
 @Entity
@@ -40,7 +39,7 @@ public class GroupSemester {
     @Id
     @SequenceGenerator(name = "groupSemesterIdSeq", sequenceName = "group_semester_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "groupSemesterIdSeq", strategy = GenerationType.SEQUENCE)
-    private BigInteger id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false,

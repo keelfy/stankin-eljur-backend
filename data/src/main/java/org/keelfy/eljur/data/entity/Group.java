@@ -28,7 +28,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @Data
 @Entity

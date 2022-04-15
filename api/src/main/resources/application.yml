@@ -2,6 +2,8 @@ server:
   port: ${SERVER_PORT:8080}
 
 spring:
+  application:
+    name: ${SERVICE_NAME:eljur-api}
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/eljur}
     username: ${DATABASE_USER:eljur_admin}
@@ -11,7 +13,6 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   liquibase:
     enabled: false
-    change-log: ${CHANGE_LOG_URL:classpath:/db/changelog-rshb/db.changelog-master.xml}
   jpa:
     hibernate:
       transaction.coordinator_class: jta
@@ -23,3 +24,51 @@ spring:
         auto_quote_keyword: true
         format_sql: true
     show-sql: ${DATABASE_SHOWSQL:false}
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: login
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+app:
+  mail:
+    sender: admin@website.ru
+    attachment-directory: ./
+    retry:
+      interval: 5000
+      max-attempts: 5
+
+  security:
+    jwt-secret: 1233212131
+
+  credentials:
+    auth:
+      attempts-to-temporarily-lock: 3
+      temporarily-locks-to-permanently-lock: 3
+      temporarily-lock-minutes: 30
+    password:
+      validation-regexp: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$)$
+      min-length: 5
+      max-length: 100
+      forgot:
+        token-expiration-minutes: 30
+        mail:
+          reset-url: https://link/to/password/reset
+          subject: mail subject [reset password]
+          message-template-name: template-name.html
+      verification-code:
+        lifetime-ms: 300000
+
+logging:
+  level:
+    ROOT: INFO

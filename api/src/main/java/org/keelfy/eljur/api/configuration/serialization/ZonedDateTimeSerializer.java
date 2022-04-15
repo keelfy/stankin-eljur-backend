@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @Getter
 public class ZonedDateTimeSerializer extends com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer {

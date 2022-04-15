@@ -3,7 +3,7 @@ package org.keelfy.eljur.api.util;
 import lombok.experimental.UtilityClass;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @UtilityClass
 public class DateTimeUtil {

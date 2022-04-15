@@ -26,7 +26,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @Data
 @Entity
@@ -38,7 +38,13 @@ public class Department {
     @Id
     @SequenceGenerator(name = "departmentIdSeq", sequenceName = "department_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "departmentIdSeq", strategy = GenerationType.SEQUENCE)
-    private BigInteger id;
+    private Long id;
+
+    @Column(name = "name", length = 512)
+    private String name;
+
+    @Column(name = "short_name", length = 50)
+    private String shortName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
     private List<Credentials> teachers;

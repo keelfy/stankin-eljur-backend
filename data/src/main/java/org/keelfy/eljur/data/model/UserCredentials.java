@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 public interface UserCredentials extends UserDetails {
 
@@ -37,7 +37,7 @@ public interface UserCredentials extends UserDetails {
 
     @Override
     default boolean isAccountNonLocked() {
-        return getLocked();
+        return !getLocked();
     }
 
     @Override

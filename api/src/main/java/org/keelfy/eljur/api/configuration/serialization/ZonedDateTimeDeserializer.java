@@ -12,7 +12,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 public class ZonedDateTimeDeserializer extends InstantDeserializer<ZonedDateTime> {
 

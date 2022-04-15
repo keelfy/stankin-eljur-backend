@@ -23,7 +23,7 @@ import java.math.BigInteger;
 import java.time.ZonedDateTime;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
 @Data
 @Entity
@@ -35,7 +35,7 @@ public class Subject {
     @Id
     @SequenceGenerator(name = "subjectIdSeq", sequenceName = "subject_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "subjectIdSeq", strategy = GenerationType.SEQUENCE)
-    private BigInteger id;
+    private Long id;
 
     @Column(name = "name", length = 1000)
     private String name;

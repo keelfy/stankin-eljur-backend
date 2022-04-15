@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.math.BigInteger;
 
 /**
- * @author Egor Kuzmin
+ * @author Yegor Kuzmin (keelfy)
  */
-public interface GradeRepository extends JpaRepository<Grade, BigInteger> {}
+public interface GradeRepository extends JpaRepository<Grade, Long> {}
