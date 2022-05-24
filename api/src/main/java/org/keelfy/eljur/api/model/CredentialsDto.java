@@ -2,6 +2,8 @@ package org.keelfy.eljur.api.model;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.keelfy.eljur.api.model.response.DepartmentResponse;
+import org.keelfy.eljur.api.model.response.GroupResponse;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -40,5 +42,9 @@ public class CredentialsDto {
     private Boolean enabled;
 
     private Collection<String> roles = new ArrayList<>();
+
+    private GroupResponse group;
+
+    private DepartmentResponse department;
 
 }

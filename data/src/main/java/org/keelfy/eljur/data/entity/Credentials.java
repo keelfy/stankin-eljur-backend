@@ -53,8 +53,14 @@ public class Credentials implements UserCredentials {
     @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "full_name", length = 512)
-    private String fullName;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "second_name")
+    private String secondName;
+
+    @Column(name = "middle_name")
+    private String middleName;
 
     @Column(name = "email")
     private String email;
@@ -69,47 +75,44 @@ public class Credentials implements UserCredentials {
     private String resetPasswordToken;
 
     @ManyToOne
-    @JoinColumn(name = "department_id", referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_credentials_department_id"))
+    @JoinColumn(name = "department", referencedColumnName = "id")
     @NotFound(action = NotFoundAction.IGNORE)
     private Department department;
 
     @ManyToOne
-    @JoinColumn(name = "group_id", referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_credentials_group_id"))
+    @JoinColumn(name = "group", referencedColumnName = "id")
     @NotFound(action = NotFoundAction.IGNORE)
     private Group group;
 
     @Column(name = "roles", length = 512)
     private String roles;
 
-    @Type(type="yes_no")
     @Column(name = "locked")
     private Boolean locked;
 
-    @Type(type="yes_no")
     @Column(name = "enabled")
     private Boolean enabled;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
-    private List<StudentSemester> studentSemesters;
 
     @Column(name = "latest_successful_authentication")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private ZonedDateTime latestSuccessfulAuthentication;
 
+    @Column(name = "record_book_number")
+    private String recordBookNumber;
+
+    @Column(name = "student_ticket_number")
+    private String studentTicketNumber;
+
     @CreatedBy
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "created_by_id", referencedColumnName = "id", updatable = false,
-            foreignKey = @ForeignKey(name = "fk_credentials_created_by_id"))
+    @JoinColumn(name = "created_by", referencedColumnName = "id", updatable = false)
     private Credentials createdBy;
 
     @LastModifiedBy
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "last_modified_by_id", referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_credentials_last_modified_by_id"))
+    @JoinColumn(name = "last_modified_by", referencedColumnName = "id")
     private Credentials lastModifiedBy;
 
     @CreationTimestamp

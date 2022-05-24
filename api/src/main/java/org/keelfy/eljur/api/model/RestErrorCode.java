@@ -30,7 +30,9 @@ public enum RestErrorCode {
 
     AUTHENTICATION(8),
 
-    TOKEN_EXPIRED(9);
+    TOKEN_EXPIRED(9),
+
+    ENTITY_CONFLICT(10);
 
     private final int code;
 

@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import org.keelfy.eljur.data.model.FinalExaminationType;
 
+import java.math.BigDecimal;
+
 /**
  * @author Yegor Kuzmin (keelfy)
  */
@@ -13,7 +15,7 @@ public class SemesterSubjectResponse {
 
     private Long id;
 
-    private String name;
+    private SubjectResponse subject;
 
     private FinalExaminationType examinationType;
 
@@ -22,5 +24,9 @@ public class SemesterSubjectResponse {
     private Boolean firstModule;
 
     private Boolean secondModule;
+
+    private BigDecimal coefficient;
+
+    private TeacherResponse teacher;
 
 }

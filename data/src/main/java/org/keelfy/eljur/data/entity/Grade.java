@@ -1,6 +1,5 @@
 package org.keelfy.eljur.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -11,12 +10,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.keelfy.eljur.data.model.GradeType;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,6 +36,7 @@ import java.time.ZonedDateTime;
 public class Grade {
 
     @Id
+    @Column(name = "id", nullable = false, precision = 38)
     @SequenceGenerator(name = "gradeIdSeq", sequenceName = "grade_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "gradeIdSeq", strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -56,34 +56,37 @@ public class Grade {
     @Column(name = "on_time")
     private Boolean onTime = true;
 
-    @ManyToOne
-    @JoinColumn(name = "student_semester_id", referencedColumnName = "id", nullable = false)
-    private StudentSemester studentSemester;
+    @Column(name = "extended_deadline")
+    private Boolean extendedDeadline = true;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    @JoinColumn(name = "semester_subject", referencedColumnName = "id", nullable = false)
     @NotFound(action = NotFoundAction.IGNORE)
-    private Subject subject;
+    private SemesterSubject semesterSubject;
+
+    @ManyToOne
+    @JoinColumn(name = "rated_student", referencedColumnName = "id")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Credentials ratedStudent;
 
     @CreatedBy
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "created_by_id", referencedColumnName = "id", updatable = false)
+    @JoinColumn(name = "created_by", referencedColumnName = "id", updatable = false)
     private Credentials createdBy;
 
     @LastModifiedBy
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "last_modified_by_id", referencedColumnName = "id")
+    @JoinColumn(name = "last_modified_by", referencedColumnName = "id")
     private Credentials lastModifiedBy;
 
     @CreationTimestamp
-    @JsonIgnore
     @Column(name = "created_at", updatable = false)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private ZonedDateTime createdAt;
 
     @UpdateTimestamp
-    @JsonIgnore
     @Column(name = "updated_at")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private ZonedDateTime updatedAt;
+
 }

@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import org.keelfy.eljur.data.model.GradeType;
 
+import java.math.BigDecimal;
+
 /**
  * @author Yegor Kuzmin (keelfy)
  */
@@ -17,12 +19,10 @@ public class GradeResponse {
 
     private GradeType gradeType;
 
-    private Long subjectId;
+    private Long semesterSubjectId;
 
     private Boolean onTime;
 
-    private String ratedByFullName;
-
-    private Long ratedById;
+    private TeacherResponse ratedBy;
 
 }

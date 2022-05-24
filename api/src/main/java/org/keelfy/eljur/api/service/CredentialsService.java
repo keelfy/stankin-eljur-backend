@@ -2,14 +2,19 @@ package org.keelfy.eljur.api.service;
 
 import com.google.i18n.phonenumbers.NumberParseException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.keelfy.eljur.api.converter.CredentialsToDtoConverter;
 import org.keelfy.eljur.api.exception.CredentialsNotFoundException;
+import org.keelfy.eljur.api.exception.DuplicatedEntityException;
 import org.keelfy.eljur.api.model.CredentialsDto;
 import org.keelfy.eljur.api.model.request.ChangeCredentialsRequest;
+import org.keelfy.eljur.api.model.request.CreateCredentialsRequest;
 import org.keelfy.eljur.api.util.PhoneNumberUtils;
 import org.keelfy.eljur.data.entity.Credentials;
 import org.keelfy.eljur.data.model.UserCredentials;
 import org.keelfy.eljur.data.repository.CredentialsRepository;
+import org.keelfy.eljur.data.repository.DepartmentRepository;
+import org.keelfy.eljur.data.repository.GroupRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +28,7 @@ import java.util.Optional;
 /**
  * @author Yegor Kuzmin (keelfy)
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CredentialsService implements UserDetailsService {
@@ -34,6 +40,10 @@ public class CredentialsService implements UserDetailsService {
     private final CredentialsRepository credentialsRepository;
 
     private final CredentialsToDtoConverter credentialsToDtoConverter;
+
+    private final DepartmentRepository departmentRepository;
+
+    private final GroupRepository groupRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -60,7 +70,8 @@ public class CredentialsService implements UserDetailsService {
     }
 
     public Credentials getCredentials() {
-        return (Credentials) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        final var principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return getCredentialsByUsername(principal);
     }
 
     public CredentialsDto getCredentialsDto() {
@@ -81,6 +92,34 @@ public class CredentialsService implements UserDetailsService {
         final var username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         final var credentials = getCredentialsByUsername(username);
         changeCredentials(credentials, request.getEmail(), request.getPhoneNumber());
+    }
+
+    public void createCredentials(@NonNull CreateCredentialsRequest request) {
+        if (credentialsRepository.findByUsername(request.getUsername()).isPresent()) {
+            throw new DuplicatedEntityException("Credentials by username=" + request.getUsername() + " already exists!");
+        }
+
+        final var department = Optional.ofNullable(request.getDepartmentId())
+                .flatMap(departmentRepository::findById)
+                .orElse(null);
+        final var group = Optional.ofNullable(request.getGroupId())
+                .flatMap(groupRepository::findById)
+                .orElse(null);
+        final var credentials = new Credentials()
+                .setEmail(request.getEmail())
+                .setDepartment(department)
+                .setGroup(group)
+                .setFirstName(request.getFirstName())
+                .setSecondName(request.getSecondName())
+                .setMiddleName(request.getMiddleName())
+                .setEnabled(false)
+                .setLocked(false)
+                .setPhoneNumber(request.getPhoneNumber())
+                .setRecordBookNumber(request.getRecordBookNumber())
+                .setStudentTicketNumber(request.getStudentTicketNumber())
+                .setUsername(request.getUsername())
+                .setRoles(request.getRole());
+        credentialsRepository.saveAndFlush(credentials);
     }
 
     @NonNull

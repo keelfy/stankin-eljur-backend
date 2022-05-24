@@ -28,15 +28,13 @@ public class InvitationController implements RootController {
 
     private final InvitationService invitationService;
 
-    @PreAuthorize("hasAuthority(T(org.keelfy.eljur.api.util.Authority).ADMINISTRATOR)")
-    @PostMapping(value = CREATE_MAPPING,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority(T(org.keelfy.eljur.api.util.Authority).ADMIN)")
+    @PostMapping(value = CREATE_MAPPING, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createInvitation(@Validated @RequestBody CreateInvitationRequest request) {
         invitationService.createInvitation(request);
     }
 
-    @PostMapping(value = ACTIVATE_MAPPING,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = ACTIVATE_MAPPING, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void completeInvitation(@Validated @RequestBody CompleteInvitationRequest request) {
         invitationService.completeInvitation(request);
     }

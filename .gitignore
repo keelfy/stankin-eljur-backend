@@ -69,3 +69,4 @@ pom.xml.releaseBackup
 pom.xml.tag
 /.apt_generated_tests/
 tmp
+*.log

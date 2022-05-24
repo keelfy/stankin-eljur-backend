@@ -23,7 +23,7 @@ public class SecurityProperties {
 
     private String tokenExpiredAttributeName = "expired";
 
-    private Long accessTokenExpirationMinutes = 30L;
+    private Long accessTokenExpirationMinutes = 1L;
 
     private Long refreshTokenExpirationMinutes = 60L;
 

@@ -1,73 +1,73 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro https://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
-
-    <changeSet author="keelfy (generated)" id="1649956214240-1">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="keelfy (generated)" id="1650582894721-1">
         <createSequence incrementBy="1" sequenceName="credentials_id_seq" startValue="1"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-2">
+    <changeSet author="keelfy (generated)" id="1650582894721-2">
         <createSequence incrementBy="1" sequenceName="department_id_seq" startValue="1"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-3">
+    <changeSet author="keelfy (generated)" id="1650582894721-3">
         <createSequence incrementBy="1" sequenceName="grade_id_seq" startValue="1"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-4">
+    <changeSet author="keelfy (generated)" id="1650582894721-4">
         <createSequence incrementBy="1" sequenceName="group_id_seq" startValue="1"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-5">
-        <createSequence incrementBy="1" sequenceName="group_semester_id_seq" startValue="1"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-6">
+    <changeSet author="keelfy (generated)" id="1650582894721-5">
         <createSequence incrementBy="1" sequenceName="invitation_id_seq" startValue="1"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-7">
+    <changeSet author="keelfy (generated)" id="1650582894721-6">
         <createSequence incrementBy="1" sequenceName="mail_journal_id_seq" startValue="1"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-8">
-        <createSequence incrementBy="1" sequenceName="student_semester_id_seq" startValue="1"/>
+    <changeSet author="keelfy (generated)" id="1650582894721-7">
+        <createSequence incrementBy="1" sequenceName="semester_id_seq" startValue="1"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-9">
+    <changeSet author="keelfy (generated)" id="1650582894721-8">
+        <createSequence incrementBy="1" sequenceName="semester_subject_id_seq" startValue="1"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-9">
         <createSequence incrementBy="1" sequenceName="subject_id_seq" startValue="1"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-10">
+    <changeSet author="keelfy (generated)" id="1650582894721-10">
         <createTable tableName="credentials_tab">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="credentials_tabPK"/>
             </column>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="email" type="VARCHAR(255)"/>
-            <column name="enabled" type="CHAR(1)"/>
+            <column name="enabled" type="BOOLEAN"/>
+            <column name="first_name" type="VARCHAR(255)"/>
             <column name="latest_successful_authentication" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="locked" type="CHAR(1)"/>
+            <column name="locked" type="BOOLEAN"/>
+            <column name="middle_name" type="VARCHAR(255)"/>
             <column name="password" type="VARCHAR(255)"/>
             <column name="phone_number" type="VARCHAR(255)"/>
             <column name="reset_password_token" type="VARCHAR(255)"/>
             <column name="roles" type="VARCHAR(512)"/>
+            <column name="second_name" type="VARCHAR(255)"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="username" type="VARCHAR(255)"/>
-            <column name="created_by_id" type="BIGINT"/>
-            <column name="department_id" type="numeric(19, 2)"/>
-            <column name="group_id" type="numeric(19, 2)"/>
-            <column name="last_modified_by_id" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="department" type="BIGINT"/>
+            <column name="group" type="BIGINT"/>
+            <column name="last_modified_by" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-11">
+    <changeSet author="keelfy (generated)" id="1650582894721-11">
         <createTable tableName="department_tab">
-            <column name="id" type="numeric(19, 2)">
+            <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="department_tabPK"/>
             </column>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="name" type="VARCHAR(512)"/>
+            <column name="short_name" type="VARCHAR(50)"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="created_by_id" type="BIGINT"/>
-            <column name="last_modified_by_id" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_modified_by" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-12">
+    <changeSet author="keelfy (generated)" id="1650582894721-12">
         <createTable tableName="grade_tab">
-            <column name="id" type="numeric(19, 2)">
+            <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="grade_tabPK"/>
             </column>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -75,72 +75,44 @@
             <column name="on_time" type="BOOLEAN"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="value" type="INTEGER"/>
-            <column name="created_by_id" type="BIGINT"/>
-            <column name="last_modified_by_id" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_modified_by" type="BIGINT"/>
             <column name="rated_by_id" type="BIGINT"/>
-            <column name="student_semester_id" type="BIGINT">
+            <column name="rated_student" type="BIGINT"/>
+            <column name="semester_subject" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-13">
-        <createTable tableName="group_semester_subject_tab">
-            <column name="group_semester_id" type="numeric(19, 2)">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="course_work" type="BOOLEAN"/>
-            <column name="final_examination_type" type="VARCHAR(255)"/>
-            <column name="first_module" type="BOOLEAN"/>
-            <column name="second_module" type="BOOLEAN"/>
-            <column name="subject_id" type="numeric(19, 2)">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-14">
-        <createTable tableName="group_semester_tab">
-            <column name="id" type="numeric(19, 2)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="group_semester_tabPK"/>
-            </column>
-            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="first_module_deadline" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="ordinal" type="INTEGER"/>
-            <column name="second_module_deadline" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="session_deadline" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="created_by_id" type="BIGINT"/>
-            <column name="group_id" type="numeric(19, 2)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="last_modified_by_id" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-15">
+    <changeSet author="keelfy (generated)" id="1650582894721-13">
         <createTable tableName="group_tab">
-            <column name="id" type="numeric(19, 2)">
+            <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="group_tabPK"/>
             </column>
+            <column name="active" type="BOOLEAN"/>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="name" type="VARCHAR(255)"/>
+            <column name="study_start_year" type="INTEGER"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="created_by_id" type="BIGINT"/>
-            <column name="department_id" type="numeric(19, 2)"/>
-            <column name="last_modified_by_id" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="department" type="BIGINT"/>
+            <column name="headman" type="BIGINT"/>
+            <column name="last_modified_by" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-16">
+    <changeSet author="keelfy (generated)" id="1650582894721-14">
         <createTable tableName="invitation">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="invitationPK"/>
             </column>
-            <column name="invitationId" type="VARCHAR(36)"/>
-            <column name="status" type="VARCHAR(255)"/>
-            <column name="validUntil" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="invitation_id" type="VARCHAR(36)"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="valid_util" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="creator" type="BIGINT"/>
             <column name="invited" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-17">
+    <changeSet author="keelfy (generated)" id="1650582894721-15">
         <createTable tableName="mail_journal">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="mail_journalPK"/>
@@ -158,123 +130,168 @@
             <column name="subject" type="VARCHAR(512)"/>
         </createTable>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-18">
-        <createTable tableName="student_semester_tab">
+    <changeSet author="keelfy (generated)" id="1650582894721-16">
+        <createTable tableName="semester">
             <column name="id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="student_semester_tabPK"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="semesterPK"/>
             </column>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="first_module_deadline" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="ordinal" type="INTEGER"/>
+            <column name="second_module_deadline" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="session_deadline" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="created_by_id" type="BIGINT"/>
-            <column name="group_semester_id" type="numeric(19, 2)">
+            <column name="created_by" type="BIGINT"/>
+            <column name="group" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_modified_by_id" type="BIGINT"/>
-            <column name="student_id" type="BIGINT">
+            <column name="last_modified_by" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-17">
+        <createTable tableName="semester_subject">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="semester_subjectPK"/>
+            </column>
+            <column name="coefficient" type="numeric(2, 1)"/>
+            <column name="course_work" type="BOOLEAN"/>
+            <column name="final_examination_type" type="VARCHAR(255)"/>
+            <column name="first_module" type="BOOLEAN"/>
+            <column name="second_module" type="BOOLEAN"/>
+            <column name="semester" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subject" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-19">
+    <changeSet author="keelfy (generated)" id="1650582894721-18">
         <createTable tableName="subject_tab">
-            <column name="id" type="numeric(19, 2)">
+            <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="subject_tabPK"/>
             </column>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="name" type="VARCHAR(1000)"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="created_by_id" type="BIGINT"/>
-            <column name="last_modified_by_id" type="BIGINT"/>
-            <column name="teacher_id" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_modified_by" type="BIGINT"/>
+            <column name="teacher" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-20">
-        <addUniqueConstraint columnNames="invitationId" constraintName="UC_INVITATIONINVITATIONID_COL" tableName="invitation"/>
+    <changeSet author="keelfy (generated)" id="1650582894721-19">
+        <addUniqueConstraint columnNames="invitation_id" constraintName="UC_INVITATIONINVITATION_ID_COL" tableName="invitation"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-21">
+    <changeSet author="keelfy (generated)" id="1650582894721-20">
         <addUniqueConstraint columnNames="username" constraintName="i_credentials_username" tableName="credentials_tab"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-22">
-        <createIndex indexName="i_student_semester_student_id" tableName="student_semester_tab">
-            <column name="student_id"/>
-        </createIndex>
+    <changeSet author="keelfy (generated)" id="1650582894721-21">
+        <addForeignKeyConstraint baseColumnNames="last_modified_by" baseTableName="grade_tab" constraintName="FK2cuobf9luksquf01f4jfcig5v" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-23">
+    <changeSet author="keelfy (generated)" id="1650582894721-22">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="grade_tab" constraintName="FK3am04963w2vjw6pcegu2fuq61" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-23">
+        <addForeignKeyConstraint baseColumnNames="department" baseTableName="credentials_tab" constraintName="FK72vkl8npdwv0ro57lpxaklynt" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="department_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-24">
+        <addForeignKeyConstraint baseColumnNames="teacher" baseTableName="subject_tab" constraintName="FK7de2nuf4n3k4c1du12i40i9gt" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-25">
+        <addForeignKeyConstraint baseColumnNames="last_modified_by" baseTableName="department_tab" constraintName="FK7ugdc5r1yueg57x0cyojnblqn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-26">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="department_tab" constraintName="FK7xrwcyat0tuf7mnwqoxk56ndt" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-27">
+        <addForeignKeyConstraint baseColumnNames="last_modified_by" baseTableName="credentials_tab" constraintName="FK98rho3v7kj0rrsur6y892v4gn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-28">
+        <addForeignKeyConstraint baseColumnNames="last_modified_by" baseTableName="subject_tab" constraintName="FKa0e02q75f131f7pboqtlacnv2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-29">
+        <addForeignKeyConstraint baseColumnNames="semester_subject" baseTableName="grade_tab" constraintName="FKb5yms7gym616hq0uqc0xuyqr9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="semester_subject" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-30">
+        <addForeignKeyConstraint baseColumnNames="group" baseTableName="semester" constraintName="FKbofjfidbsr153y31kvkodqu8u" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="group_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-31">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="semester" constraintName="FKcok4hhqlemh88in6e6odeenai" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-32">
         <addForeignKeyConstraint baseColumnNames="creator" baseTableName="invitation" constraintName="FKf77w9btvqiwc2xydef3orvpsf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-24">
+    <changeSet author="keelfy (generated)" id="1650582894721-33">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="credentials_tab" constraintName="FKft9yff6rygsqk490wl16q9msu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-34">
+        <addForeignKeyConstraint baseColumnNames="rated_by_id" baseTableName="grade_tab" constraintName="FKgx9nrmk8una46n50yavbluns1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-35">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="group_tab" constraintName="FKhwxkm77h51bnj6qet1askqr5c" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-36">
+        <addForeignKeyConstraint baseColumnNames="department" baseTableName="group_tab" constraintName="FKme8qkmtx6kuqkw43vuv62w8es" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="department_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-37">
+        <addForeignKeyConstraint baseColumnNames="rated_student" baseTableName="grade_tab" constraintName="FKnaa5hs9aw3j5afgoukkriaiec" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-38">
+        <addForeignKeyConstraint baseColumnNames="group" baseTableName="credentials_tab" constraintName="FKntawdo75w2xy3wqrqgaei02dj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="group_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-39">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="subject_tab" constraintName="FKnxsijlfqbc35o93vq5d0s3hbl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-40">
+        <addForeignKeyConstraint baseColumnNames="last_modified_by" baseTableName="group_tab" constraintName="FKod1hybswxrhcl7w7jygr3rjkc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    </changeSet>
+    <changeSet author="keelfy (generated)" id="1650582894721-41">
         <addForeignKeyConstraint baseColumnNames="invited" baseTableName="invitation" constraintName="FKp9xqna9w65r9x8j6lkaclntmb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-25">
-        <addForeignKeyConstraint baseColumnNames="created_by_id" baseTableName="credentials_tab" constraintName="fk_credentials_created_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1650582894721-42">
+        <addForeignKeyConstraint baseColumnNames="semester" baseTableName="semester_subject" constraintName="FKr18mwvwr7qscoll76m3v9jls1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="semester" validate="true"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-26">
-        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="credentials_tab" constraintName="fk_credentials_department_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="department_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1650582894721-43">
+        <addForeignKeyConstraint baseColumnNames="headman" baseTableName="group_tab" constraintName="FKrgef39prfmlt5c6g5ftn7ib59" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-27">
-        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="credentials_tab" constraintName="fk_credentials_group_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="group_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1650582894721-44">
+        <addForeignKeyConstraint baseColumnNames="subject" baseTableName="semester_subject" constraintName="FKt4ghkdm61bqpc0dnh6x0y12r3" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="subject_tab" validate="true"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-28">
-        <addForeignKeyConstraint baseColumnNames="last_modified_by_id" baseTableName="credentials_tab" constraintName="fk_credentials_last_modified_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1650582894721-45">
+        <addForeignKeyConstraint baseColumnNames="last_modified_by" baseTableName="semester" constraintName="FKt5qnyd3qv4y2vqgkhk4lehws6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-29">
-        <addForeignKeyConstraint baseColumnNames="created_by_id" baseTableName="department_tab" constraintName="fk_department_created_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1650852650804-10">
+        <addColumn tableName="group_tab">
+            <column name="degree" type="varchar(50)"/>
+        </addColumn>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-30">
-        <addForeignKeyConstraint baseColumnNames="last_modified_by_id" baseTableName="department_tab" constraintName="fk_department_last_modified_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1651006082017-10">
+        <addColumn tableName="grade_tab">
+            <column name="extended_deadline" type="boolean"/>
+        </addColumn>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-31">
-        <addForeignKeyConstraint baseColumnNames="created_by_id" baseTableName="grade_tab" constraintName="fk_grade_created_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1651006082017-11">
+        <addColumn tableName="semester_subject">
+            <column name="teacher" type="int8"/>
+        </addColumn>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-32">
-        <addForeignKeyConstraint baseColumnNames="last_modified_by_id" baseTableName="grade_tab" constraintName="fk_grade_last_modified_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1651006082017-12">
+        <addForeignKeyConstraint baseColumnNames="teacher" baseTableName="semester_subject" constraintName="FK46pgrqgxl2rfquets8fpvwqtp" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-33">
-        <addForeignKeyConstraint baseColumnNames="rated_by_id" baseTableName="grade_tab" constraintName="fk_grade_rated_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1651006082017-13">
+        <dropForeignKeyConstraint baseTableName="subject_tab" constraintName="FK7de2nuf4n3k4c1du12i40i9gt"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-34">
-        <addForeignKeyConstraint baseColumnNames="student_semester_id" baseTableName="grade_tab" constraintName="fk_grade_student_semester_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="student_semester_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1651006082017-14">
+        <dropColumn columnName="teacher" tableName="subject_tab"/>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-35">
-        <addForeignKeyConstraint baseColumnNames="created_by_id" baseTableName="group_tab" constraintName="fk_group_created_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1651018424357-10">
+        <addColumn tableName="credentials_tab">
+            <column name="record_book_number" type="varchar(255)"/>
+        </addColumn>
     </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-36">
-        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="group_tab" constraintName="fk_group_department_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="department_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-37">
-        <addForeignKeyConstraint baseColumnNames="last_modified_by_id" baseTableName="group_tab" constraintName="fk_group_last_modified_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-38">
-        <addForeignKeyConstraint baseColumnNames="created_by_id" baseTableName="group_semester_tab" constraintName="fk_group_semester_created_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-39">
-        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="group_semester_tab" constraintName="fk_group_semester_group_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="group_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-40">
-        <addForeignKeyConstraint baseColumnNames="last_modified_by_id" baseTableName="group_semester_tab" constraintName="fk_group_semester_last_modified_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-41">
-        <addForeignKeyConstraint baseColumnNames="group_semester_id" baseTableName="group_semester_subject_tab" constraintName="fk_group_semester_subject_semester_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="group_semester_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-42">
-        <addForeignKeyConstraint baseColumnNames="subject_id" baseTableName="group_semester_subject_tab" constraintName="fk_group_semester_subject_subject_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="subject_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-43">
-        <addForeignKeyConstraint baseColumnNames="created_by_id" baseTableName="student_semester_tab" constraintName="fk_student_semester_created_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-44">
-        <addForeignKeyConstraint baseColumnNames="group_semester_id" baseTableName="student_semester_tab" constraintName="fk_student_semester_group_semester_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="group_semester_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-45">
-        <addForeignKeyConstraint baseColumnNames="last_modified_by_id" baseTableName="student_semester_tab" constraintName="fk_student_semester_last_modified_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-46">
-        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="student_semester_tab" constraintName="fk_student_semester_student_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-47">
-        <addForeignKeyConstraint baseColumnNames="created_by_id" baseTableName="subject_tab" constraintName="fk_subject_created_by_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
-    </changeSet>
-    <changeSet author="keelfy (generated)" id="1649956214240-48">
-        <addForeignKeyConstraint baseColumnNames="last_modified_by_id" baseTableName="subject_tab" constraintName="fk_subject_teacher_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="credentials_tab" validate="true"/>
+    <changeSet author="keelfy (generated)" id="1651018424357-11">
+        <addColumn tableName="credentials_tab">
+            <column name="student_ticket_number" type="varchar(255)"/>
+        </addColumn>
     </changeSet>
 </databaseChangeLog>

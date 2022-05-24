@@ -3,17 +3,23 @@ package org.keelfy.eljur.api.model.response;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.util.List;
-
 /**
  * @author Yegor Kuzmin (keelfy)
  */
 @Data
 @Accessors(chain = true)
-public class StudentSemesterResponse {
+public class StudentResponse {
 
     private Long id;
 
-    private List<GradeResponse> grades;
+    private String email;
+
+    private String firstName;
+
+    private String secondName;
+
+    private String middleName;
+
+    private GroupResponse group;
 
 }

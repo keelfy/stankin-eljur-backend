@@ -38,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] PERMITTED_POST_REQUESTS = {
+            TokenController.REFRESH_TOKEN_MAPPING,
             RestConstants.AUTH_LOGIN_URL,
             RestConstants.AUTH_LOGOUT_URL,
             InvitationController.ACTIVATE_MAPPING,

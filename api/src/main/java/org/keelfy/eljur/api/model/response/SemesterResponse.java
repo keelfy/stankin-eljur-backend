@@ -12,13 +12,11 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class GroupSemesterResponse {
+public class SemesterResponse {
 
     private Long id;
 
     private Integer ordinal;
-
-    private List<SemesterSubjectResponse> subjectList;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private ZonedDateTime firstModuleDeadline;
@@ -28,5 +26,7 @@ public class GroupSemesterResponse {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private ZonedDateTime sessionDeadline;
+
+    private List<SemesterSubjectResponse> semesterSubjectList;
 
 }

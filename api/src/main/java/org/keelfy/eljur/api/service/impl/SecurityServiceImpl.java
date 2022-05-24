@@ -16,6 +16,7 @@ import org.keelfy.eljur.api.model.response.RefreshTokenResponse;
 import org.keelfy.eljur.api.service.CredentialsService;
 import org.keelfy.eljur.api.service.SecurityService;
 import org.keelfy.eljur.data.entity.Credentials;
+import org.keelfy.eljur.data.entity.Group;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -23,6 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Yegor Kuzmin (keelfy)
@@ -47,8 +49,8 @@ public final class SecurityServiceImpl implements SecurityService {
                 .parseClaimsJws(token.replace(securityProperties.getTokenPrefix(), ""));
         return Map.of(
                 TokenClaimType.USERNAME, claims.getBody().getSubject(),
-                TokenClaimType.ROLES, claims.getBody().get(TokenClaimType.ROLES.toString()),
-                TokenClaimType.USER_ID, claims.getBody().get(TokenClaimType.USER_ID.toString())
+                TokenClaimType.ROLES, claims.getBody().get(TokenClaimType.ROLES.getCode()),
+                TokenClaimType.USER_ID, claims.getBody().get(TokenClaimType.USER_ID.getCode())
         );
     }
 
@@ -68,8 +70,11 @@ public final class SecurityServiceImpl implements SecurityService {
 
     private String createToken(Credentials credentials, Collection<String> roles, long expirationTime) {
         return builder(credentials.getUsername(), expirationTime)
-                .claim(TokenClaimType.ROLES.toString(), roles)
-                .claim(TokenClaimType.USER_ID.toString(), credentials.getId())
+                .claim(TokenClaimType.ROLES.getCode(), roles)
+                .claim(TokenClaimType.USER_ID.getCode(), credentials.getId())
+                .claim(TokenClaimType.GROUP_ID.getCode(), Optional.ofNullable(credentials.getGroup()).map(Group::getId).orElse(-1L))
+                .claim(TokenClaimType.FIRST_NAME.getCode(), credentials.getFirstName())
+                .claim(TokenClaimType.SECOND_NAME.getCode(), credentials.getSecondName())
                 .compact();
     }
 
@@ -78,7 +83,7 @@ public final class SecurityServiceImpl implements SecurityService {
         final var properties = credentialsProperties.getPassword().getForgot();
         final var expirationTime = properties.getTokenExpirationMinutes() * MILLIS_MULTIPLIER;
         return builder(credentials.getEmail(), expirationTime)
-                .claim(TokenClaimType.USER_ID.toString(), credentials.getId())
+                .claim(TokenClaimType.USER_ID.getCode(), credentials.getId())
                 .compact();
     }
 

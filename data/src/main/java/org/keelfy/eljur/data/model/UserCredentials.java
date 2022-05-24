@@ -1,12 +1,10 @@
 package org.keelfy.eljur.data.model;
 
-import org.keelfy.eljur.data.entity.StudentSemester;
 import org.keelfy.eljur.data.util.SecurityUtil;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author Yegor Kuzmin (keelfy)
@@ -18,8 +16,6 @@ public interface UserCredentials extends UserDetails {
     Boolean getLocked();
 
     Boolean getEnabled();
-
-    List<StudentSemester> getStudentSemesters();
 
     default Collection<String> getLiteralAuthorities() {
         return SecurityUtil.splitAuthoritiesToString(getRoles());

@@ -7,6 +7,7 @@ import org.keelfy.eljur.api.model.CredentialsDto;
 import org.keelfy.eljur.api.model.request.ChangeCredentialsRequest;
 import org.keelfy.eljur.api.model.request.ChangeForgottenPasswordRequest;
 import org.keelfy.eljur.api.model.request.ChangePasswordRequest;
+import org.keelfy.eljur.api.model.request.CreateCredentialsRequest;
 import org.keelfy.eljur.api.model.request.ForgotPasswordRequest;
 import org.keelfy.eljur.api.service.CredentialsService;
 import org.keelfy.eljur.api.service.PasswordService;
@@ -39,6 +40,8 @@ public class CredentialsController implements RootController {
 
     public static final String CHANGE_FORGOTTEN_PASSWORD_MAPPING = FORGOT_PASSWORD_MAPPING + "/change";
 
+    public static final String CREATE_MAPPING = CONTROLLER_MAPPING + "/create";
+
     private final CredentialsService credentialsService;
 
     private final PasswordService passwordService;
@@ -66,6 +69,11 @@ public class CredentialsController implements RootController {
     @PostMapping(value = CHANGE_FORGOTTEN_PASSWORD_MAPPING, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void changeForgottenPassword(@Validated @RequestBody ChangeForgottenPasswordRequest request) {
         passwordService.changeForgottenPassword(request);
+    }
+
+    @PostMapping(value = CREATE_MAPPING, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createCredentials(@Validated @RequestBody CreateCredentialsRequest request) {
+        credentialsService.createCredentials(request);
     }
 
 }
